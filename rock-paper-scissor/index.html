@@ -1,10 +1,32 @@
 <html>
     <head>
         <title>Rock paper scissor</title>
+        <style>
+        
+        </style>
     </head>
     <body>
+        <center>
+            <h1>Rock, Paper, Scissor </h1>
+            <div id="container">
+                <button onclick="playFromUi('rock')">Rock</button>
+                <button onclick="playFromUi('paper')">Paper</button>
+                <button onclick="playFromUi('scissor')">Scissor</button>
+            </div>
+            
+            <div id="endGame">
+                <button onclick="scoreBoard()">End Game!</button>
+            </div>
+            
+            <div id="score">
+                
+            </div>
+        </center>
         <script>
-            plays = ["rock", "paper", "scissor"]
+            plays = ["rock", "paper", "scissor"];
+            let playerScore = 0;
+            let computerScore = 0;
+            
             function computerPlay() {
               return plays[(Math.random() * plays.length | 0)]  
             }
@@ -42,33 +64,33 @@
                 this.computerScore = computerScore;
             }
             
-            function game() {
-                var playerScore  = 0;
-                var computerScore = 0;
-                for(var i=0; i<5; i++) {
-                    const playerSelection = prompt("Enter your choice").toLowerCase();
-                    if(playerSelection != "rock" && playerSelection != "scissor" && playerSelection != "paper") {
-                        alert("Not a valid input. You should enter either rock, paper or scissor");
-                        i -= 1;
-                        continue;
-                    }
+            function playFromUi(playerSelection) {
                     const computerSelection = computerPlay();
                     var score = playRound(playerSelection, computerSelection);
                     if(score == 1) { playerScore += 1;}
                     if(score == -1) { computerScore += 1};
-                }
-                
-                var leaderBoard = new LeaderBoard(playerScore, computerScore);
-                console.table(leaderBoard);
-                
-                if(playerScore < computerScore) {
-                    alert("Computer wins..")
-                } else {
-                    alert("Player wins ..")
-                }
             }
             
-            game();
+            function scoreBoard() {
+                //var leaderBoard = new LeaderBoard(playerScore, computerScore);
+                //console.table(leaderBoard);
+                let status = "";
+                if(playerScore == computerScore) {
+                    status = "<br>It is a tie."
+                } else if(playerScore < computerScore) {
+                    status = "<br>Computer Wins !."
+                } else {
+                    status = "<br>You win. Hurrayyyyy !"
+                }
+                
+                const container = document.querySelector('#score');
+                const content = document.createElement('div');
+                content.classList.add('content');
+                content.innerHTML = 'Your score is ' + playerScore + "<br>" + "Computer score is " + computerScore + status;
+
+                container.appendChild(content);   
+            }
+            
         </script>
     </body>
 </html>
