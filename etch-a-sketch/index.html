@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <title>Etch a sketch</title>
+        <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
+        <style>
+            body {
+                align-content: center;
+                font-family: 'Jua', sans-serif;
+            }
+            div[class^='row'] {
+                 width: 680px;
+                 height: auto;
+            }
+            
+            div[class^='col'] {
+                float: left;
+                width: 40px;
+                height: 40px;
+                border: 1px solid black;
+                
+            }
+        </style>
+    </head>
+    
+    <body>
+        <center>
+            <h1>Etch a Sketch!</h1>
+            <div id="grid">
+            
+            </div>
+        </center>
+        <script>
+            var rowSize = 16;
+            var columnSize = 16;
+            
+            for(var i=0; i<rowSize; i++) {
+                const grid = document.querySelector("#grid");
+                const row = document.createElement("div");
+                const currentRowName = "row-" + i.toString();
+                row.classList.add(currentRowName);
+                for(var j=0; j<columnSize; j++) {
+                    const column = document.createElement('div');
+                    const currentColumnName = "col-" + j.toString() + "-" + currentRowName;
+                    column.classList.add(currentColumnName);
+                    
+                    column.innerHTML = "<br>";
+                    row.appendChild(column);
+                }
+                grid.appendChild(row);
+            }
+        </script>
+    </body>
+</html>
