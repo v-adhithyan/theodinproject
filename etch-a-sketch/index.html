@@ -8,7 +8,6 @@
                 font-family: 'Jua', sans-serif;
             }
             div[class^='row'] {
-                 width: 680px;
                  height: auto;
             }
             
@@ -19,35 +18,84 @@
                 border: 1px solid black;
                 
             }
+            
+            button {
+                border-radius: 10px;
+                height: 35px;
+                width: 15%;
+                background-color: black;
+                color: white;
+            }
+            #controls, #end {
+                margin-top: 30px;
+                margin-bottom: 30px;
+            }
+            
         </style>
     </head>
     
     <body>
         <center>
             <h1>Etch a Sketch!</h1>
+            <div id="controls">
+                <button onclick="reset();">Reset</button>
+            </div>
             <div id="grid">
             
             </div>
+            <div id="end">
+                <!-- to show some space / padding after the grid -->
+            </div>
         </center>
         <script>
-            var rowSize = 16;
-            var columnSize = 16;
-            
-            for(var i=0; i<rowSize; i++) {
-                const grid = document.querySelector("#grid");
-                const row = document.createElement("div");
-                const currentRowName = "row-" + i.toString();
-                row.classList.add(currentRowName);
-                for(var j=0; j<columnSize; j++) {
-                    const column = document.createElement('div');
-                    const currentColumnName = "col-" + j.toString() + "-" + currentRowName;
-                    column.classList.add(currentColumnName);
+            function drawGrid(rowSize, columnSize) {
+                // if we need a 16 * 16 grid, we need 16 squares in one row.
+                // the width of each square is 40. so row width should be (16 * 40) and + 40 for sanity.
+                var rowWidth = (rowSize * 40) + 40;
+                console.log("row width:" + rowWidth);
+                
+                for(var i=0; i<rowSize; i++) {
+                    const grid = document.querySelector("#grid");
+                    const row = document.createElement("div");
+                    const currentRowName = "row-" + i.toString();                    
+                    row.classList.add(currentRowName);
                     
-                    column.innerHTML = "<br>";
-                    row.appendChild(column);
-                }
-                grid.appendChild(row);
+                    for(var j=0; j<columnSize; j++) {
+                        const column = document.createElement('div');
+                        const currentColumnName = "col-" + j.toString() + "-" + currentRowName;
+                        column.classList.add(currentColumnName);
+                    
+                        column.innerHTML = "<br>";
+                        row.appendChild(column);
+                    }
+                    grid.appendChild(row);
+                    
+                    document.getElementsByClassName(currentRowName)[0].style.width = (rowWidth + "px");;
+                    //document.getElementsByClassName(currentRowName)[0].addEventListener("mouseover", highlightGrid(this));
+                    
+                }  
             }
+            
+            function highlightGrid(elem) {
+                //alert("work");
+                elem.style.backgroundColor = '#FF0000';
+            }
+            
+            function reset() {
+                document.getElementById("grid").innerHTML = "";
+                
+                var gridSize = prompt("Enter grid size: (For example if you need a 32 x 32 grid, enter 32)")
+                if(!isFinite(gridSize)) {
+                    alert("You should enter only numbers.");
+                    return;
+                }
+                
+                const rowSize = parseInt(gridSize, 10);
+                const columnSize = rowSize;
+                drawGrid(rowSize, columnSize);
+            }
+            
+            drawGrid(16, 16);
         </script>
     </body>
 </html>
