@@ -18,6 +18,9 @@
                 border: 1px solid black;
                 
             }
+            div[class^='col']:hover {
+                background-color: black;
+            }
             
             button {
                 border-radius: 10px;
@@ -38,7 +41,7 @@
         <center>
             <h1>Etch a Sketch!</h1>
             <div id="controls">
-                <button onclick="reset();">Reset</button>
+                <button onclick="reset();">RESET</button>
             </div>
             <div id="grid">
             
@@ -66,19 +69,16 @@
                         column.classList.add(currentColumnName);
                     
                         column.innerHTML = "<br>";
+                        var leaveTrail = document.createAttribute("onMouseOut");
+                        leaveTrail.value = "this.style.backgroundColor='black'";
+                        column.setAttributeNode(leaveTrail);
                         row.appendChild(column);
                     }
                     grid.appendChild(row);
                     
-                    document.getElementsByClassName(currentRowName)[0].style.width = (rowWidth + "px");;
-                    //document.getElementsByClassName(currentRowName)[0].addEventListener("mouseover", highlightGrid(this));
-                    
+                    var currentElement = document.getElementsByClassName(currentRowName)[0];
+                    currentElement.style.width = (rowWidth + "px");
                 }  
-            }
-            
-            function highlightGrid(elem) {
-                //alert("work");
-                elem.style.backgroundColor = '#FF0000';
             }
             
             function reset() {
