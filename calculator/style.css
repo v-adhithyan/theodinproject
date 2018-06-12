@@ -12,6 +12,14 @@ body {
     text-align: right;
     font-size: 75px;
 }
+.expression-display {
+    width: 98.5%;
+    height: 50px;
+    font-size: 37.5px;
+    border: 5px solid black;
+    float: right;
+}
+
 .input {
     border: auto solid black;
     height: auto;
