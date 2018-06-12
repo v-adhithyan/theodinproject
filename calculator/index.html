@@ -14,24 +14,25 @@
                    <div class="input-button" onclick="display('7');">7</div>
                    <div class="input-button" onclick="display('8');">8</div>
                    <div class="input-button" onclick="display('9');">9</div>
-                   <div class="input-button">/</div>
+                   <div class="input-button" onclick="saveNumber('/');">/</div>
                    <div class="input-button" onclick="display('4');">4</div>
                    <div class="input-button" onclick="display('5');">5</div>
                    <div class="input-button" onclick="display('6');">6</div>
-                   <div class="input-button">*</div>
+                   <div class="input-button" onclick="saveNumber('*');">*</div>
                    <div class="input-button" onclick="display('1');">1</div>
                    <div class="input-button" onclick="display('2');">2</div>
                    <div class="input-button" onclick="display('3');">3</div>
-                   <div class="input-button">-</div>
-                   <div class="input-button">+</div>
+                   <div class="input-button" onclick="saveNumber('-');">-</div>
+                   <div class="input-button" onclick="saveNumber('+');">+</div>
                    <div class="input-button" onclick="display('0');">0</div>
-                   <div class="input-button" onclick="clearDisplay()">del</div>
-                   <div class="input-button">=</div>
+                   <div class="input-button" onclick="clearDisplay();">clr</div>
+                   <div class="input-button" onclick="performCalculation();">=</div>
                </div>
             </div>
             
         </center>
         <script>
+            let expression = "";
             
             function add(num1, num2) {
                 return num1 + num2;
@@ -49,10 +50,59 @@
                 return num1 / num2;
             }
             
-            function operate(operator, num1, num2) {
-                switch (operator) {
+            function performCalculation() {
+                expression = expression + getText();
+                expression = expression.trim();
+                console.log(expression);
+                let result = "";
+                let i = 0;
+                let numberOneSet = false, numberTwoSet = false;
+                let numberOne = "", numberTwo = "", op = "";
+                let current = "", opCount = 0;
+                
+                for(; i<expression.length; i++) {
+                    if(isFinite(expression.charAt(i))){
+                        current += expression.charAt(i);
+                        continue;
+                    } else {
+                        opCount ++; 
+                        if(opCount > 1) {
+                            numberTwo = current;
+                            current = "";
+                            result = operate(op, numberOne, numberTwo);
+                        
+                            numberOne = result.toString();
+                        }
+                        op = expression.charAt(i);
+                    }
                     
+                    if(!numberOneSet) {
+                        numberOne = current;
+                        current = "";
+                        numberOneSet = true;
+                        continue;
+                    }
                     
+                }
+                
+                result = operate(op, numberOne, current);
+                setText(result);
+                expression = "";
+            }
+            
+            function operate(op, numOne, numTwo) {
+                let numberOne = parseInt(numOne, 10);
+                let numberTwo = parseInt(numTwo, 10);
+                console.log(op, numberOne, numberTwo);
+                switch (op) {
+                    case '+':
+                        return add(numberOne, numberTwo);
+                    case '-':
+                        return subtract(numberOne, numberTwo);
+                    case '*':
+                        return multiply(numberOne, numberTwo);
+                    case '/':
+                        return divide(numberOne, numberTwo);
                 }
             }
             
@@ -71,6 +121,23 @@
             function clearDisplay() {
                 let display = document.querySelector(".display");
                 display.textContent = "";
+                expression = "";
+            }
+            
+            function getText() {
+                let display = document.querySelector(".display");
+                return display.textContent;
+            }
+            
+            function setText(text) {
+                let display = document.querySelector(".display");
+                display.textContent = text;
+            }
+            
+            function saveNumber(operator) {
+                expression = expression + getText() + operator;
+                expression = expression.trim();
+                setText("");
             }
         </script>
     </body>
