@@ -7,6 +7,7 @@
     <body>
         <center>
             <div class="container">
+                <h1>CALCULATOR</h1>
                <div class="display">
                 
                </div>
@@ -17,20 +18,24 @@
                    <div class="input-button" onclick="display('7');">7</div>
                    <div class="input-button" onclick="display('8');">8</div>
                    <div class="input-button" onclick="display('9');">9</div>
-                   <div class="input-button" onclick="saveNumber('/');">/</div>
+                   <div class="operator-button" onclick="saveNumber('/');">/</div>
                    <div class="input-button" onclick="display('4');">4</div>
                    <div class="input-button" onclick="display('5');">5</div>
                    <div class="input-button" onclick="display('6');">6</div>
-                   <div class="input-button" onclick="saveNumber('*');">*</div>
+                   <div class="operator-button" onclick="saveNumber('*');">*</div>
                    <div class="input-button" onclick="display('1');">1</div>
                    <div class="input-button" onclick="display('2');">2</div>
                    <div class="input-button" onclick="display('3');">3</div>
-                   <div class="input-button" onclick="saveNumber('-');">-</div>
-                   <div class="input-button" onclick="saveNumber('+');">+</div>
+                   <div class="operator-button" onclick="saveNumber('-');">-</div>
+                   <div class="input-button" onclick="performCalculation();">=</div>
                    <div class="input-button" onclick="display('0');">0</div>
                    <div class="input-button" onclick="clearDisplay();">clr</div>
-                   <div class="input-button" onclick="performCalculation();">=</div>
+                   <div class="operator-button" onclick="saveNumber('+');">+</div>
                </div>
+                
+                <div class="footer">
+                Designed by <a href="https://github.com/v-adhithyan">Adhithyan Vijayakumar.</a>
+                </div>
             </div>
             
         </center>
