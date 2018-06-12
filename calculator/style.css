@@ -2,24 +2,26 @@ body {
     font-family: 'Work Sans', sans-serif;
 }
 .container {
-    width: 50%;
-    height: 50%;
+    width: 500px;
+    height: 500px;
 }
 .display {
-    height: 100px;
+    height: 75px;
     width: auto;
     border: 1px solid black;
+    border-radius: 10px;
     text-align: right;
-    font-size: 75px;
+    font-size: 50px;
     background-color: black;
     color: white;
 }
 .expression-display {
     width: auto;
-    height: 50px;
-    font-size: 37.5px;
+    height: 25px;
+    font-size: 20px;
     border: 1px solid black;
     text-align: right;
+    border-radius: 10px;
 }
 
 .input {
@@ -29,23 +31,29 @@ body {
 }
 
 .input-button {
-    height: 150px;
-    width: 24.7%;
+    height: 25%;
+    width: 24.5%;                     %;
     float: left;
     border: 1px solid black;
-    font-size: 100px;
+    border-radius: 10px;
     font-style: normal;
+    font-size: 50px;
+    text-align: center;
+    background-color: antiquewhite;
 }
 
 .operator-button {
-    height: 150px;
-    width: 24.7%;
+    height: 25%;
+    width: 24.9%;
     float: left;
     border: 1px solid black;
-    font-size: 100px;
+    border-radius: 10px;
+    align-content: center;
     font-style: normal;
     background-color: orange;
     color: white;
+    font-size: 50px;
+    text-align: center;
 }
 .input-button:hover, .operator-button:hover {
     background-color: #40E0D0;
