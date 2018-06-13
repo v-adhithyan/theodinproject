@@ -1,9 +1,7 @@
 <html>
     <head>
         <title>Rock paper scissor</title>
-        <style>
-        
-        </style>
+        <link rel="stylesheet" type="text/css" href="styles.css">
     </head>
     <body>
         <center>
@@ -13,13 +11,34 @@
                 <button onclick="playFromUi('paper')">Paper</button>
                 <button onclick="playFromUi('scissor')">Scissor</button>
             </div>
-            
-            <div id="endGame">
-                <button onclick="scoreBoard()">End Game!</button>
+            <div id="position">
+                <div id="current">
+                </div>
+                <div id="computer">
+                </div>
+                <div id="you">
+                </div>
             </div>
             
             <div id="score">
-                
+                <table border="1">
+                    <thead>
+                        <th>Your score</th>
+                        <th>Computer score</th>
+                    </thead>
+                    <tbody>
+                        <td><div id="your-score">0</div></td>
+                        <td><div id="computer-score">0</div></td>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div id="footer">
+                <center>
+                <div id="endGame">
+                    <button onclick="scoreBoard()">End Game!</button>
+                </div>
+                    </center>
             </div>
         </center>
         <script>
@@ -33,27 +52,30 @@
             
             function playRound(playerSelection, computerSelection) {
                 playerSelection = playerSelection.toString();
-              
+                
+                setComputerChoice(computerSelection);
+                setPlayerChoice(playerSelection);
+                
                 if(playerSelection == computerSelection) {
-                    alert("Tie ..")
+                    setCurrentPosition("Tie ..")
                     return 0;
                 } else {
                     if(playerSelection == "rock" && computerSelection != "paper") {
-                        alert("You win .. " + playerSelection + " beats " + computerSelection);
+                        setCurrentPosition("You win .. " + playerSelection + " beats " + computerSelection);
                         return 1;
                     }
                     
                     if(playerSelection == "paper" && computerSelection != "scissor") {
-                        alert("You win .. " + playerSelection + " beats " + computerSelection);
+                        setCurrentPosition("You win .. " + playerSelection + " beats " + computerSelection);
                         return 1;
                     }
                     
                     if(playerSelection == "scissor" && computerSelection != "rock") {
-                        alert("You win .. " + playerSelection + " beats " + computerSelection);
+                        setCurrentPosition("You win .. " + playerSelection + " beats " + computerSelection);
                         return 1;
                     }
                     
-                    alert("You lose .. " + computerSelection + " beats " + playerSelection);
+                    setCurrentPosition("You lose .. " + computerSelection + " beats " + playerSelection);
                     return -1;
                 }
                 
@@ -69,6 +91,31 @@
                     var score = playRound(playerSelection, computerSelection);
                     if(score == 1) { playerScore += 1;}
                     if(score == -1) { computerScore += 1};
+                    
+                    setCurrentScore(playerScore, computerScore);
+            }
+            
+            function setComputerChoice(choice) {
+                var computer = document.getElementById("computer");
+                computer.textContent = "Computer chose: " + choice;
+            }
+            
+            function setPlayerChoice(choice) {
+                var you = document.getElementById("you");
+                you.textContent = "You chose: " + choice;
+            }
+            
+            function setCurrentPosition(result) {
+                var current = document.getElementById("current");
+                current.textContent = result;
+            }
+            
+            function setCurrentScore(playerScore, computerScore) {
+                const player = document.querySelector("#your-score");
+                player.textContent = playerScore;
+                
+                const computer = document.querySelector("#computer-score");
+                computer.textContent = computerScore;
             }
             
             function scoreBoard() {
