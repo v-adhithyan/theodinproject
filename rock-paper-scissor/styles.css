@@ -1,10 +1,17 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
 button {
-    width: 100px;
-    height: 50px;
+    width: 200px;
+    height: 100px;
     background: orange;
     border-radius: 10px solid transparent;
     color: white;
     text-decoration-color: white;
+    border: transparent;
+    margin-top: 30px;
+    font-size: 50px;
 }
 
 #footer {
@@ -15,15 +22,50 @@ button {
 }
 #computer {
     float: left;
-    text-align: left;
+    text-align: center;
     padding-top: 30px;
+    width: 25%;
+    height: 100px;
+    background-color: cadetblue;
+    font-size: 35px;
+    padding-bottom: 15px;
+    color: snow;
 }
 #you {
     float: right;
-    text-align: right;
+    text-align: center;
     padding-top: 30px;
+    width: 25%;
+    height: 100px;
+    background-color: cornflowerblue;
+    font-size: 35px;
+    padding-bottom: 15px;
+    color: snow;
 }
 #current {
     text-align: center;
     padding-top: 30px;
+    width: 50%;
+    height: 50px;
+    background-color: aquamarine;
+    color: black;
+    font-size: 35px;
+    padding-bottom: 15px;
+   
+}
+#score {
+    font-size: 30px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+table {
+    border: 1px  black;
+    text-align: center;
+    column-width: 100px;
+}
+.content {
+  background-color: slateblue;
+  padding-bottom: 5px;
+  color: antiquewhite;
+  text-transform: uppercase;
 }

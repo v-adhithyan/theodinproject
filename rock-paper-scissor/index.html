@@ -2,44 +2,35 @@
     <head>
         <title>Rock paper scissor</title>
         <link rel="stylesheet" type="text/css" href="styles.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     </head>
     <body>
         <center>
-            <h1>Rock, Paper, Scissor </h1>
+            <h1>Rock-Paper-Scissor Game</h1>
             <div id="container">
                 <button onclick="playFromUi('rock')">Rock</button>
                 <button onclick="playFromUi('paper')">Paper</button>
                 <button onclick="playFromUi('scissor')">Scissor</button>
             </div>
-            <div id="position">
+            
+           <div id="score">Player:
+                <span id="your-score" class="gameScore">0</span> | Computer:
+                <span id="computer-score" class="gameScore">0</span>
+           </div>
+           <div id="position">
                 <div id="current">
+                    Tap on Rock, Paper or Scissor to start game.
                 </div>
                 <div id="computer">
+                    Computer
                 </div>
                 <div id="you">
+                    Player
                 </div>
             </div>
-            
-            <div id="score">
-                <table border="1">
-                    <thead>
-                        <th>Your score</th>
-                        <th>Computer score</th>
-                    </thead>
-                    <tbody>
-                        <td><div id="your-score">0</div></td>
-                        <td><div id="computer-score">0</div></td>
-                    </tbody>
-                </table>
-            </div>
-            
-            <div id="footer">
-                <center>
-                <div id="endGame">
-                    <button onclick="scoreBoard()">End Game!</button>
-                </div>
-                    </center>
-            </div>
+           <div id="endGame">
+                <button style="background:red;font-size:40px;" onclick="scoreBoard()">End Game!</button>
+           </div>
         </center>
         <script>
             plays = ["rock", "paper", "scissor"];
@@ -133,7 +124,7 @@
                 const container = document.querySelector('#score');
                 const content = document.createElement('div');
                 content.classList.add('content');
-                content.innerHTML = 'Your score is ' + playerScore + "<br>" + "Computer score is " + computerScore + status;
+                content.innerHTML = status;
 
                 container.appendChild(content);   
             }
