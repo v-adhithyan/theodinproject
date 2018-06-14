@@ -22,10 +22,10 @@
                     Tap on Rock, Paper or Scissor to start game.
                 </div>
                 <div id="computer">
-                    Computer
+                    
                 </div>
                 <div id="you">
-                    Player
+                    
                 </div>
             </div>
            <div id="endGame">
@@ -88,16 +88,25 @@
             
             function setComputerChoice(choice) {
                 var computer = document.getElementById("computer");
-                computer.textContent = "Computer chose: " + choice;
+                //computer.textContent = "Computer chose: " + choice;
             }
             
             function setPlayerChoice(choice) {
                 var you = document.getElementById("you");
-                you.textContent = "You chose: " + choice;
+                //you.textContent = "You chose: " + choice;
             }
             
             function setCurrentPosition(result) {
                 var current = document.getElementById("current");
+                current.style = "color:black;"
+                
+                if(result.toLowerCase().indexOf("lose") > 0) {
+                    current.style = "color:red;"
+                }
+                
+                if(result.toLowerCase().indexOf("win") > 0) {
+                    current.style = "color:green;"
+                }
                 current.textContent = result;
             }
             
@@ -121,12 +130,19 @@
                     status = "<br>You win. Hurrayyyyy !"
                 }
                 
+                const position = document.querySelector('#position');
+                position.innerHTML = "";
                 const container = document.querySelector('#score');
                 const content = document.createElement('div');
                 content.classList.add('content');
-                content.innerHTML = status;
+                content.style = "color:green;"
+                if(status.toLowerCase().indexOf("computer") > 0) {
+                    content.style = "color:red;"
+                } 
+                content.innerHTML = status + "<br> Hit refresh to start a new game.";
 
-                container.appendChild(content);   
+                container.appendChild(content);
+                document.getElementById("endGame").style.display = "none";
             }
             
         </script>
