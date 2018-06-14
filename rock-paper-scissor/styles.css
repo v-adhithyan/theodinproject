@@ -1,17 +1,26 @@
 body {
-    #font-family: 'Roboto', sans-serif;
+    font-family: 'Dosis', sans-serif;
+    background-color: rebeccapurple;
+    color: white;
 }
-
-button {
+#container {
+    width: 50%;
+    height: auto;
+    padding-bottom: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.button-controls {
     width: 200px;
     height: 200px;
-    background: orange;
+    background-color: indianred;
     border-radius: 10px solid transparent;
     color: white;
     text-decoration-color: white;
     border: transparent;
     margin-top: 30px;
     border-radius: 50%;
+    font-size: 30px;
 }
 button:hover {
     background-color: seagreen;
@@ -46,7 +55,7 @@ button:hover {
     padding-top: 30px;
     width: 50%;
     height: 50px;
-    color: black;
+    color: white;
     font-size: 35px;
     padding-bottom: 15px;
    
@@ -65,4 +74,10 @@ table {
   padding-bottom: 5px;
   color: antiquewhite;
   text-transform: uppercase;
+}
+.center-cropped {
+  width: 200px;
+  height: 200px;
+  background-position: center center;
+  background-repeat: no-repeat;
 }

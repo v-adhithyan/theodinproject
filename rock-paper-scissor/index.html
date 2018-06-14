@@ -2,34 +2,32 @@
     <head>
         <title>Rock paper scissor</title>
         <link rel="stylesheet" type="text/css" href="styles.css">
-        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
     </head>
     <body>
         <center>
             <h1>Rock-Paper-Scissor Game</h1>
             <div id="container">
-                <button onclick="playFromUi('rock')"><img src="assets/icons8-rock-100.png"></button>
-                <button onclick="playFromUi('paper')"><img src="assets/icons8-sheet-of-paper-100.png"></button>
-                <button onclick="playFromUi('scissor')"><img src="assets/icons8-cut-100.png"></button>
+                <button class="button-controls" style="float:left;" onclick="playFromUi('rock')"><img src="assets/rock.png">ROCK</button>
+                <button class="button-controls" style="float:center;" onclick="playFromUi('paper')"><img src="assets/paper.png">PAPER</button>
+                <button class="button-controls" style="float:right;" onclick="playFromUi('scissor')"><img src="assets/scissor.png">SCISSOR</button>
             </div>
             
            <div id="score">Player:
                 <span id="your-score" class="gameScore">0</span> | Computer:
                 <span id="computer-score" class="gameScore">0</span>
            </div>
+           <div id="choice">Your choice:
+                <span id="your-choice" class="gameScore">#</span> | Computer's Choice:
+                <span id="computer-choice" class="gameScore">#</span>
+            </div>    
            <div id="position">
                 <div id="current">
                     Tap on Rock, Paper or Scissor to start game.
                 </div>
-                <div id="computer">
-                    
-                </div>
-                <div id="you">
-                    
-                </div>
             </div>
            <div id="endGame">
-                <button style="background:red;font-size:40px;" onclick="scoreBoard()">End Game!</button>
+                <button style="width:200px;height:50px;font-size:20px;background:orangered;border:0px solid transparent;color:white;" onclick="scoreBoard()">End Game!</button>
            </div>
         </center>
         <script>
@@ -48,25 +46,25 @@
                 setPlayerChoice(playerSelection);
                 
                 if(playerSelection == computerSelection) {
-                    setCurrentPosition("Tie ..")
+                    setCurrentPosition("Tie ..", "")
                     return 0;
                 } else {
                     if(playerSelection == "rock" && computerSelection != "paper") {
-                        setCurrentPosition("You win .. " + playerSelection + " beats " + computerSelection);
+                        setCurrentPosition("You win .. " + playerSelection + " beats " + computerSelection, "assets/rs.gif");
                         return 1;
                     }
                     
                     if(playerSelection == "paper" && computerSelection != "scissor") {
-                        setCurrentPosition("You win .. " + playerSelection + " beats " + computerSelection);
+                        setCurrentPosition("You win .. " + playerSelection + " beats " + computerSelection, "assets/pr.gif");
                         return 1;
                     }
                     
                     if(playerSelection == "scissor" && computerSelection != "rock") {
-                        setCurrentPosition("You win .. " + playerSelection + " beats " + computerSelection);
+                        setCurrentPosition("You win .. " + playerSelection + " beats " + computerSelection, "assets/sp.gif");
                         return 1;
                     }
                     
-                    setCurrentPosition("You lose .. " + computerSelection + " beats " + playerSelection);
+                    setCurrentPosition("You lose .. " + computerSelection + " beats " + playerSelection, "");
                     return -1;
                 }
                 
@@ -87,27 +85,50 @@
             }
             
             function setComputerChoice(choice) {
-                var computer = document.getElementById("computer");
-                //computer.textContent = "Computer chose: " + choice;
+                var computer = document.getElementById("computer-choice");
+                computer.textContent = choice
             }
             
             function setPlayerChoice(choice) {
-                var you = document.getElementById("you");
-                //you.textContent = "You chose: " + choice;
+                var you = document.getElementById("your-choice");
+                you.textContent = choice
             }
             
-            function setCurrentPosition(result) {
+            function setCurrentPosition(result, image) {
                 var current = document.getElementById("current");
-                current.style = "color:black;"
-                
-                if(result.toLowerCase().indexOf("lose") > 0) {
-                    current.style = "color:red;"
+                current.innerHTML = "";
+                let elem = document.getElementsByClassName("center-cropped")[0];
+                    if(elem != null) {
+                        elem.parentNode.removeChild(elem);
+
                 }
+                
+                if(result.toLowerCase().indexOf("tie") >= 0) {
+                    current.style = "color:black;"
+                    current.textContent = "Tie";
+                    return;
+                } 
                 
                 if(result.toLowerCase().indexOf("win") > 0) {
-                    current.style = "color:green;"
+                    current.style = "color:palegreen;"
+                    current.textContent = "You win";
+                    
+                    
+                    const imageDiv = document.createElement("div");
+                    imageDiv.classList.add("center-cropped");
+                    imageDiv.style.backgroundImage = "url" + "(" + image + ")";
+                    document.getElementById("position").appendChild(imageDiv);
+                    return;
                 }
-                current.textContent = result;
+                
+                if(result.toLowerCase().indexOf("lose") > 0) {
+                    current.style = "color:orangered;"
+                    current.textContent = "You lose";
+                    //current.style.backgroundImage = "url" + "(" + image + ")";
+                    return;
+                }
+                
+                
             }
             
             function setCurrentScore(playerScore, computerScore) {
@@ -123,7 +144,7 @@
                 //console.table(leaderBoard);
                 let status = "";
                 if(playerScore == computerScore) {
-                    status = "<br>It is a tie."
+                    status = "<br>It's a tie."
                 } else if(playerScore < computerScore) {
                     status = "<br>Computer Wins !."
                 } else {
@@ -135,10 +156,12 @@
                 const container = document.querySelector('#score');
                 const content = document.createElement('div');
                 content.classList.add('content');
-                content.style = "color:green;"
+                content.style = "color:white";
                 if(status.toLowerCase().indexOf("computer") > 0) {
-                    content.style = "color:red;"
-                } 
+                    content.style = "color:orangered;"
+                } else if(status.toLowerCase().indexOf("win") > 0) {
+                    content.style = "color:palegreen;"
+                }
                 content.innerHTML = status + "<br> Hit refresh to start a new game.";
 
                 container.appendChild(content);
