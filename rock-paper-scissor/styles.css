@@ -4,7 +4,7 @@ body {
 
 button {
     width: 200px;
-    height: 100px;
+    height: 200px;
     background: orange;
     border-radius: 10px solid transparent;
     color: white;
@@ -12,8 +12,11 @@ button {
     border: transparent;
     margin-top: 30px;
     font-size: 50px;
+    border-radius: 50%;
 }
-
+button:hover {
+    background-color: seagreen;
+}
 #footer {
     position: absolute;
     bottom: 0;
